@@ -36,12 +36,17 @@ const Person = (props: PersonComponentProps) => {
               changeCurrentChildren(getCurrentChildren(e.id));
             }}
           ></img>
+          <div className="child__name">{e.name}</div>
+          <div className="child__post">{e.post ? e.post : ""}</div>
         </div>
       ))}
     </div>
   );
   return (
     <div>
+      <div className="navbar-buttons">
+        <span className="navbar-buttons__back">Back</span>
+      </div>
       <div className="parents">
         {currentParents.map((e: Person) => (
           <div className="parent">
@@ -49,7 +54,6 @@ const Person = (props: PersonComponentProps) => {
               className="parent__image"
               src={`/images/${e.image}`}
               onClick={() => {
-                console.log(e.image);
                 changeCurrentParentId(e.id);
                 changeCurrentChildren(getCurrentChildren(e.id));
               }}

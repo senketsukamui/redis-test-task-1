@@ -3,5 +3,62 @@
     border-radius: 50%;
     height: 188px;
     width: 188px;
+    padding: 30px;
+  }
+  &__name {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 61px;
+    line-height: 128.6%;
+    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+  }
+  &__post {
+    text-align: center;
+  }
+}
+
+.children {
+  display: flex;
+  justify-content: center;
+}
+
+.parents {
+  display: flex;
+  justify-content: center;
+}
+
+.child {
+  &__image {
+    border-radius: 50%;
+    height: 188px;
+    width: 188px;
+    padding: 30px;
+  }
+  &__name {
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 110%;
+    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+  }
+  &__post {
+    text-align: center;
+  }
+}
+
+.navbar-buttons {
+  &__back {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 128.6%;
+    letter-spacing: 0.035em;
+    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+    margin-top: 89px;
+    margin-left: 273px;
+    opacity: 0.2;
+    border-bottom: 1px solid #dbae64;
   }
 }
