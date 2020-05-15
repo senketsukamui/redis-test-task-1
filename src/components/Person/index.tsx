@@ -1,6 +1,7 @@
 import "./index.scss";
 import React from "react";
 import { dataArray } from "./../../data";
+import { url } from "inspector";
 interface Person {
   id: number;
   name: string;
@@ -22,7 +23,44 @@ const Person = (props: PersonComponentProps) => {
   const [currentChildren, changeCurrentChildren] = React.useState<Person[]>(
     getCurrentChildren(currentParentId)
   );
-  return <div></div>;
+  const renderedChildren = (
+    <div className="children">
+      {currentChildren.map((e: Person) => (
+        <div className="child">
+          <img
+            className="child__image"
+            src={`/images/${e.image}`}
+            onClick={() => {
+              console.log(e.image);
+              changeCurrentParentId(e.id);
+              changeCurrentChildren(getCurrentChildren(e.id));
+            }}
+          ></img>
+        </div>
+      ))}
+    </div>
+  );
+  return (
+    <div>
+      <div className="parents">
+        {currentParents.map((e: Person) => (
+          <div className="parent">
+            <img
+              className="parent__image"
+              src={`/images/${e.image}`}
+              onClick={() => {
+                console.log(e.image);
+                changeCurrentParentId(e.id);
+                changeCurrentChildren(getCurrentChildren(e.id));
+              }}
+            ></img>
+            <div className="parent__name">{e.name}</div>
+            <div className="parent__post">{e.post ? e.post : ""}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default Person;
