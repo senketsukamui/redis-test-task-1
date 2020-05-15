@@ -1,7 +1,7 @@
 import "./index.scss";
 import React from "react";
 import { dataArray } from "./../../data";
-import { url } from "inspector";
+import * as _ from "lodash";
 interface Person {
   id: number;
   name: string;
@@ -31,8 +31,8 @@ const Person = (props: PersonComponentProps) => {
             className="child__image"
             src={`/images/${e.image}`}
             onClick={() => {
-              console.log(e.image);
               changeCurrentParentId(e.id);
+              changeCurrentParents(data.filter((p: Person) => p.id === e.id));
               changeCurrentChildren(getCurrentChildren(e.id));
             }}
           ></img>
@@ -59,6 +59,7 @@ const Person = (props: PersonComponentProps) => {
           </div>
         ))}
       </div>
+      {renderedChildren}
     </div>
   );
 };
