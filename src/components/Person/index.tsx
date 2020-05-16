@@ -16,13 +16,20 @@ const Person = (props: PersonComponentProps) => {
     const newChildren = data.filter((e: Person) => e.parent === parentId);
     return newChildren;
   };
+  const onBackButtonClick = () => {
+    const ids = [...parentIds];
+    ids.pop();
+    const newParent = ids.pop();
+    changeCurrentChildren(newParent ? getCurrentChildren(newParent) : []);
+    changeCurrentParents(data.filter((p: Person) => p.id === newParent));
+    changeParentIds(ids);
+  };
   const [currentParents, changeCurrentParents] = React.useState<Person[]>(
     data.filter((e: Person) => !e.parent)
   );
-  const [currentParentId, changeCurrentParentId] = React.useState<number>(1);
-  const [currentChildren, changeCurrentChildren] = React.useState<Person[]>(
-    getCurrentChildren(currentParentId)
-  );
+  const [parentIds, changeParentIds] = React.useState<Array<number>>([]);
+  const [currentChildren, changeCurrentChildren] = React.useState<Person[]>([]);
+
   const renderedChildren = (
     <div className="children">
       {currentChildren.map((e: Person) => (
@@ -31,7 +38,7 @@ const Person = (props: PersonComponentProps) => {
             className="child__image"
             src={`/images/${e.image}`}
             onClick={() => {
-              changeCurrentParentId(e.id);
+              changeParentIds([...parentIds, e.id]);
               changeCurrentParents(data.filter((p: Person) => p.id === e.id));
               changeCurrentChildren(getCurrentChildren(e.id));
             }}
@@ -42,9 +49,10 @@ const Person = (props: PersonComponentProps) => {
       ))}
     </div>
   );
+  console.log(parentIds);
   return (
     <div>
-      <div className="navbar-buttons">
+      <div className="navbar-buttons" onClick={onBackButtonClick}>
         <span className="navbar-buttons__back">Back</span>
       </div>
       <div className="parents">
@@ -54,7 +62,7 @@ const Person = (props: PersonComponentProps) => {
               className="parent__image"
               src={`/images/${e.image}`}
               onClick={() => {
-                changeCurrentParentId(e.id);
+                changeParentIds([...parentIds, e.id]);
                 changeCurrentChildren(getCurrentChildren(e.id));
               }}
             ></img>

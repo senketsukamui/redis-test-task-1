@@ -11,10 +11,15 @@
     font-weight: normal;
     font-size: 61px;
     line-height: 128.6%;
-    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+    background: -webkit-linear-gradient(#ffd28d 47.92%, #352000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   &__post {
     text-align: center;
+    background: -webkit-linear-gradient(#ffd28d 47.92%, #352000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -39,12 +44,18 @@
     text-align: center;
     font-style: normal;
     font-weight: normal;
+    background-clip: text;
     font-size: 32px;
     line-height: 110%;
-    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+    background: -webkit-linear-gradient(#ffd28d 47.92%, #352000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   &__post {
     text-align: center;
+    background: -webkit-linear-gradient(#ffd28d 47.92%, #352000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
@@ -55,7 +66,9 @@
     font-size: 26px;
     line-height: 128.6%;
     letter-spacing: 0.035em;
-    color: linear-gradient(180deg, #ffd28d 47.92%, #352000 100%);
+    background: -webkit-linear-gradient(#ffd28d 47.92%, #352000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-top: 89px;
     margin-left: 273px;
     opacity: 0.2;
