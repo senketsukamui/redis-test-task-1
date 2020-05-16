@@ -19,7 +19,13 @@ const Person = (props: PersonComponentProps) => {
   const onBackButtonClick = () => {
     const ids = [...parentIds];
     ids.pop();
-    const newParent = ids.pop();
+    if (!ids.length) {
+      changeParentIds(ids);
+      changeCurrentParents(data.filter((e: Person) => !e.parent));
+      changeCurrentChildren([]);
+      return;
+    }
+    const newParent = ids[ids.length - 1];
     changeCurrentChildren(newParent ? getCurrentChildren(newParent) : []);
     changeCurrentParents(data.filter((p: Person) => p.id === newParent));
     changeParentIds(ids);
@@ -38,9 +44,11 @@ const Person = (props: PersonComponentProps) => {
             className="child__image"
             src={`/images/${e.image}`}
             onClick={() => {
-              changeParentIds([...parentIds, e.id]);
-              changeCurrentParents(data.filter((p: Person) => p.id === e.id));
-              changeCurrentChildren(getCurrentChildren(e.id));
+              if (e.id !== parentIds[parentIds.length - 1]) {
+                changeParentIds([...parentIds, e.id]);
+                changeCurrentParents(data.filter((p: Person) => p.id === e.id));
+                changeCurrentChildren(getCurrentChildren(e.id));
+              }
             }}
           ></img>
           <div className="child__name">{e.name}</div>
@@ -49,7 +57,6 @@ const Person = (props: PersonComponentProps) => {
       ))}
     </div>
   );
-  console.log(parentIds);
   return (
     <div>
       <div className="navbar-buttons" onClick={onBackButtonClick}>
@@ -62,8 +69,9 @@ const Person = (props: PersonComponentProps) => {
               className="parent__image"
               src={`/images/${e.image}`}
               onClick={() => {
-                changeParentIds([...parentIds, e.id]);
-                changeCurrentChildren(getCurrentChildren(e.id));
+                if (e.id !== parentIds[parentIds.length - 1]) {
+                  changeCurrentChildren(getCurrentChildren(e.id));
+                }
               }}
             ></img>
             <div className="parent__name">{e.name}</div>

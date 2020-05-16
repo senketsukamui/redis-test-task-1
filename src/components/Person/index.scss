@@ -1,4 +1,7 @@
 .parent {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   &__image {
     border-radius: 50%;
     height: 188px;
@@ -73,5 +76,6 @@
     margin-left: 273px;
     opacity: 0.2;
     border-bottom: 1px solid #dbae64;
+    cursor: pointer;
   }
 }
