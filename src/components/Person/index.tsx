@@ -16,6 +16,11 @@ const Person = (props: PersonComponentProps) => {
     const newChildren = data.filter((e: Person) => e.parent === parentId);
     return newChildren;
   };
+  const [currentParents, changeCurrentParents] = React.useState<Person[]>(
+    data.filter((e: Person) => !e.parent)
+  );
+  const [parentIds, changeParentIds] = React.useState<Array<number>>([]);
+  const [currentChildren, changeCurrentChildren] = React.useState<Person[]>([]);
   const onBackButtonClick = () => {
     const ids = [...parentIds];
     ids.pop();
@@ -30,11 +35,6 @@ const Person = (props: PersonComponentProps) => {
     changeCurrentParents(data.filter((p: Person) => p.id === newParent));
     changeParentIds(ids);
   };
-  const [currentParents, changeCurrentParents] = React.useState<Person[]>(
-    data.filter((e: Person) => !e.parent)
-  );
-  const [parentIds, changeParentIds] = React.useState<Array<number>>([]);
-  const [currentChildren, changeCurrentChildren] = React.useState<Person[]>([]);
 
   const renderedChildren = (
     <div className="children">
@@ -57,11 +57,38 @@ const Person = (props: PersonComponentProps) => {
       ))}
     </div>
   );
+  const onLogoClick = () => {
+    changeCurrentChildren([]);
+    changeCurrentParents(data.filter((e: Person) => !e.parent));
+    changeParentIds([]);
+  };
   return (
     <div>
-      <div className="navbar-buttons" onClick={onBackButtonClick}>
-        <span className="navbar-buttons__back">Back</span>
-      </div>
+      {parentIds.length ? (
+        <div className="navbar-buttons">
+          <span className="navbar-buttons__back" onClick={onBackButtonClick}>
+            Back
+          </span>
+          <img
+            className="navbar-buttons__logo"
+            src="./logo.png"
+            onClick={onLogoClick}
+          />
+        </div>
+      ) : !currentChildren.length ? (
+        <div className="main-page__logo">
+          <img src="./logo.png" />
+        </div>
+      ) : (
+        <div className="navbar-buttons" onClick={onBackButtonClick}>
+          <span className="navbar-buttons__back">Back</span>
+          <img
+            className="navbar-buttons__logo"
+            src="./logo.png"
+            onClick={onLogoClick}
+          />
+        </div>
+      )}
       <div className="parents">
         {currentParents.map((e: Person) => (
           <div className="parent">
@@ -70,6 +97,9 @@ const Person = (props: PersonComponentProps) => {
               src={`/images/${e.image}`}
               onClick={() => {
                 if (e.id !== parentIds[parentIds.length - 1]) {
+                  changeCurrentParents(
+                    data.filter((p: Person) => p.id === e.id)
+                  );
                   changeCurrentChildren(getCurrentChildren(e.id));
                 }
               }}

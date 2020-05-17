@@ -63,6 +63,9 @@
 }
 
 .navbar-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   &__back {
     font-style: normal;
     font-weight: normal;
@@ -73,9 +76,24 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-top: 89px;
-    margin-left: 273px;
+    margin-left: 129px;
     opacity: 0.2;
     border-bottom: 1px solid #dbae64;
     cursor: pointer;
+  }
+  &__logo {
+    width: 88px;
+    height: 79px;
+    cursor: pointer;
+    margin-top: 89px;
+    margin-right: 129px;
+  }
+}
+
+.main-page {
+  &__logo {
+    width: 380px;
+    height: 345px;
+    margin: 4rem auto;
   }
 }
